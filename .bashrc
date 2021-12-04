@@ -145,7 +145,7 @@ if [ -d "$HOME/.platformio/penv/bin" ] ; then
 fi
 
 # Setup pyenv
-export PATH="/home/$USER/.pyenv/bin:$PATH"
+export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
