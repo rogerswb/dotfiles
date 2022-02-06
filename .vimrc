@@ -43,11 +43,10 @@ set incsearch " Highlights search term matches as you type
 " Disable editor line wrapping
 set nowrap
 
-" Disable main toolbar
-set guioptions -=T
-
 " Set DevaVu Sans Mono, 8 pt as the default GUI font
 if has("gui_running")
+    " Disable main toolbar
+    set guioptions -=T
     set guifont=Terminus\ 8
 endif
 
