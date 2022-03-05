@@ -139,18 +139,8 @@ if [ -d "/snap" ] ; then
     PATH="/snap/bin:$PATH"
 fi
 
-# Set PATH to include PlatormIO core binaries
-if [ -d "$HOME/.platformio/penv/bin" ] ; then
-    PATH="$HOME/.platformio/penv/bin:$PATH"
-fi
-
-# Setup pyenv
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv virtualenv-init -)"
-
-# Setup GPG SSH logins using GPG smart card devices
-eval $(gpg-agent --quiet --daemon --enable-ssh-support)
-export GPG_TTY=$(tty)
-export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-
+# Load all mini .bashrc files
+for f in ~/.bashrc.d/*.bashrc;
+do
+    source “$f”
+done
