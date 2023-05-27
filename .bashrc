@@ -142,5 +142,5 @@ fi
 # Load all mini .bashrc files
 for f in ~/.bashrc.d/*.bashrc;
 do
-    source “$f”
+    source "$f"
 done
