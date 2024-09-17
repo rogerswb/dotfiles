@@ -6,6 +6,7 @@
 # Load the environment modules configuration
 if [ -e /usr/share/modules/init/profile.sh ]; then
     source /usr/share/modules/init/profile.sh
+fi
 
 # If not running interactively, don't do anything
 case $- in
