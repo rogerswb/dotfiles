@@ -132,8 +132,8 @@ fi
 # fi
 
 # Load all mini .bashrc files
-if [ -d "$HOME/.bashrc.d" ]; then
-    for f in "$HOME/.bashrc.d/*.bashrc";
+if [ -d $HOME/.bashrc.d ]; then
+    for f in $HOME/.bashrc.d/*.bashrc;
     do
         source "$f"
     done
