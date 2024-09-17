@@ -4,7 +4,8 @@
 
 
 # Load the environment modules configuration
-source /usr/share/modules/init/profile.sh
+if [ -e /usr/share/modules/init/profile.sh ]; then
+    source /usr/share/modules/init/profile.sh
 
 # If not running interactively, don't do anything
 case $- in
@@ -60,8 +61,14 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# Configure a color formatted prompt if available
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    # Differentiate between root and everyone else
+    if [ $USER = "root" ]; then
+        PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u\[\033[01;32m\]@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]# '
+    else
+        PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    fi
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -117,30 +124,16 @@ if ! shopt -oq posix; then
 fi
 
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
-
 # Actually, don't do this if it doesn't exist. The drive's not mounting at boot time, but this still needs to be in the path
 # set PATH for research storage bin if it exists
 # if [ -d "/research/bin" ] ; then
     PATH="/research/bin:$PATH"
 # fi
 
-# set PATH to include Snap applications
-if [ -d "/snap" ] ; then
-    PATH="/snap/bin:$PATH"
-fi
-
 # Load all mini .bashrc files
-for f in ~/.bashrc.d/*.bashrc;
-do
-    source "$f"
-done
+if [ -d "$HOME/.bashrc.d" ]; then
+    for f in "$HOME/.bashrc.d/*.bashrc";
+    do
+        source "$f"
+    done
+fi
