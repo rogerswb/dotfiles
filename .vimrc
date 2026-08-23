@@ -5,6 +5,8 @@
 " au BufNewFile,BufRead *.for set syntax=fortran
 au BufNewFile,BufRead *.m set syntax=octave
 au BufNewFile,BufRead *.mako set syntax=html
+au BufNewFile,BufRead *.spec set syntax=python
+au BufNewFile,BufRead *.xsh set syntax=python
 
 let fortran_have_tabs=1
 
